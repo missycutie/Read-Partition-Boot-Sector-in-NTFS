@@ -1,2 +1,2 @@
-﻿# Read-Partition-Boot-Sector-in-NTFS
-
+﻿# Read-Partition-Boot-Sector-in-NTFS 
+ written  
