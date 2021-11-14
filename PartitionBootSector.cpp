@@ -30,7 +30,7 @@ void readBPB(BYTE sector[512], uint32_t& Sc, uint32_t& begin_MFT_cluster){
     PartitionBootSector PBS;
     memcpy(&PBS, BPB, sizeof(PartitionBootSector));
     printInfoPartitionBootSector(PBS);
-    Sc = (uint32_t)PBS.sectors_per_cluster;
+    Sc = (long int)PBS.sectors_per_cluster;
     begin_MFT_cluster = convertBytesToInt(PBS.begin_cluster_MFT, 8);
 }
 

@@ -1,8 +1,8 @@
-#ifndef __SECTOR_H__
-#define __SECTOR_H__
+#ifndef __MFT_ENTRY_H__
+#define __MFT_ENTRY_H__
 #include "helper.h"
 using namespace std;
-int ReadSector(LPCWSTR  drive, uint32_t readPoint, BYTE sector[512])
+int ReadMFTEntry(LPCWSTR  drive, uint32_t readPoint, BYTE entry[1024])
 {
     DWORD bytesRead;
     HANDLE device = NULL;
@@ -23,7 +23,7 @@ int ReadSector(LPCWSTR  drive, uint32_t readPoint, BYTE sector[512])
 
     SetFilePointer(device, readPoint, NULL, FILE_BEGIN);//Set a Point to Read
 
-    if (!ReadFile(device, sector, 512, &bytesRead, NULL))
+    if (!ReadFile(device, entry, 1024, &bytesRead, NULL))
     {
         printf("ReadFile: %u\n", GetLastError());
     }
@@ -32,13 +32,23 @@ int ReadSector(LPCWSTR  drive, uint32_t readPoint, BYTE sector[512])
     
         printf("Success!\n");
         cout << "OFFSET:   0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F" << endl; 
+       
         for (int i = 0; i < 512; i++) {
             if (i % 16 == 0) {
                 cout << endl;
                 cout << toHex(i/16) <<"0   :  ";
             }
              
-            cout << toHex(sector[i]) << " ";
+            cout << toHex(entry[i]) << " ";
+        }
+        cout << endl;
+        for (int i = 512; i < 1024; i++){
+            if (i % 16 == 0) {
+                cout << endl;
+                cout << toHex(i/16) <<"0   :  ";
+            }
+             
+            cout << toHex(entry[i]) << " ";
         }
         
     }
