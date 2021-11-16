@@ -2,9 +2,9 @@
 #define __FILENAME_DATA_H__
 #include <windows.h>
 #include <stdint.h>
-
+#include <string>
 #define SIZE_OF_NAME 100
-
+using namespace std;
 struct FileNameData {
     uint8_t parent_folder_MFT_entry[8]; //Dia chi entry thu muc cha
     uint8_t create_file_time[8]; //Thoi gian tao tap tin 
@@ -17,7 +17,7 @@ struct FileNameData {
     uint8_t reparse_value[4];
     uint8_t length_of_name;
     uint8_t name_space;
-    char namefile[SIZE_OF_NAME];
+    char namefile[100];
 };
 
 #endif

@@ -30,26 +30,26 @@ int ReadMFTEntry(LPCWSTR  drive, uint32_t readPoint, BYTE entry[1024])
     else
     {
     
-        printf("Success!\n");
-        cout << "OFFSET:   0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F" << endl; 
+        return 0;
+        // cout << "OFFSET:   0  1  2  3  4  5  6  7  8  9  A  B  C  D  E  F" << endl; 
        
-        for (int i = 0; i < 512; i++) {
-            if (i % 16 == 0) {
-                cout << endl;
-                cout << toHex(i/16) <<"0   :  ";
-            }
+        // for (int i = 0; i < 512; i++) {
+        //     if (i % 16 == 0) {
+        //         cout << endl;
+        //         cout << toHex(i/16) <<"0   :  ";
+        //     }
              
-            cout << toHex(entry[i]) << " ";
-        }
-        cout << endl;
-        for (int i = 512; i < 1024; i++){
-            if (i % 16 == 0) {
-                cout << endl;
-                cout << toHex(i/16) <<"0   :  ";
-            }
+        //     cout << toHex(entry[i]) << " ";
+        // }
+        // cout << endl;
+        // for (int i = 512; i < 1024; i++){
+        //     if (i % 16 == 0) {
+        //         cout << endl;
+        //         cout << toHex(i/16) <<"0   :  ";
+        //     }
              
-            cout << toHex(entry[i]) << " ";
-        }
+        //     cout << toHex(entry[i]) << " ";
+        // }
         
     }
     return 0;

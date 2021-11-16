@@ -11,4 +11,5 @@ uint32_t convertBytesToInt(const BYTE bytes[], int n);
 string toBinary(int n);
 string bitwise_complement(string strbit);
 string toHex(unsigned int decnum);
+
 #endif
