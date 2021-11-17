@@ -24,7 +24,7 @@ int checkCondition(uint32_t flags, uint32_t name_space, uint32_t value_of_flags)
     }
     else return 0;
 }
-void printMFTEntryInfo(FileNameData FND, headerMFT header_mft_entry, uint32_t first_MFT_sector, uint32_t entry_readpoint, uint32_t size_of_name ){
+void printMFTEntryInfo(FileNameData FND, uint32_t first_MFT_sector, uint32_t entry_readpoint, uint32_t size_of_name ){
     cout << "ten tap tin la : ";
     for (int i = 0; i < size_of_name; i++){
         cout << FND.namefile[i] << " ";
@@ -46,13 +46,13 @@ void printMFTEntryInfo(FileNameData FND, headerMFT header_mft_entry, uint32_t fi
         cout << "co bao: " << convertBytesToInt(FND.value_of_flags, 4) << endl;
         cout << "Index: " << first_MFT_sector + convertBytesToInt(FND.parent_folder_MFT_entry, 8)*2 << endl;
     }
-    cout << "flag : " << convertBytesToInt(header_mft_entry.flags,2) << endl;
-    cout << "Sequence number : " << convertBytesToInt(header_mft_entry.sequence_number,2) << endl;
+    // cout << "flag : " << convertBytesToInt(header_mft_entry.flags,2) << endl;
+    // cout << "Sequence number : " << convertBytesToInt(header_mft_entry.sequence_number,2) << endl;
     cout << "sector bat dau la : " << entry_readpoint << endl;
     cout << " ----------------------------" << endl;
 
 }
-void readMFTEntryHeader(BYTE entry[1024], uint32_t& first_MFT_sector, uint32_t& entry_readpoint, FileNameData& FND, headerMFT& header_mft_entry, uint32_t& size_of_name){
+void readMFTEntryHeader(BYTE entry[1024], uint32_t& first_MFT_sector, FileNameData& FND, headerMFT& header_mft_entry, uint32_t& size_of_name){
     BYTE headerMFTEntry[42];
     for (int i = 0; i < 42; i++){
         headerMFTEntry[i] = entry[i];
@@ -80,39 +80,7 @@ void readMFTEntryHeader(BYTE entry[1024], uint32_t& first_MFT_sector, uint32_t& 
     for (int i = 0, j = sD; i < size_of_data_file_name, j < eD; i++, j++){
         file_name_data[i] = entry[j];
     }
-    // FileNameData FND;
-    // cout << endl;
-    // cout << size_of_name << endl;
-    memcpy(&FND, file_name_data, sizeof(FileNameData));
-    
-    // if (checkCondition(convertBytesToInt(header_mft_entry.flags, 2), (int)FND.name_space, convertBytesToInt(FND.value_of_flags,4))){
-    //     cout << "ten tap tin la : ";
-    //     for (int i = 0; i < size_of_name; i++){
-    //         cout << FND.namefile[i] << " ";
-    //     }
-    //     cout << endl;
-    //     // cout << size_of_data_file_name << " " << offset_data_file_name << endl;
-
-    //     cout << "Kieu dinh dang cho namespace: " << (int)FND.name_space << endl;
-    //     cout << "Chieu dai ten tap tin: " << (int)FND.length_of_name << endl;
-    //     cout <<convertBytesToInt(FND.parent_folder_MFT_entry,8) << endl;
-    //     if (convertBytesToInt(FND.value_of_flags,4) == 32) {
-    //         cout << "Trang thai: Tap tin " << endl;
-    //         cout << "co bao: " << convertBytesToInt(FND.value_of_flags, 4) << endl;
-    //         cout << "Index: " << 6480 + convertBytesToInt(FND.parent_folder_MFT_entry, 8)*2 << endl;
-
-    //     }
-    //     if (convertBytesToInt(FND.value_of_flags,4) == 268435456){
-    //         cout << "Trang thai: Thu muc " << endl;
-    //         cout << "co bao: " << convertBytesToInt(FND.value_of_flags, 4) << endl;
-    //         cout << "Index: " << first_MFT_sector + convertBytesToInt(FND.parent_folder_MFT_entry, 8)*2 << endl;
-    //     }
-    //     cout << "flag : " << convertBytesToInt(header_mft_entry.flags,2) << endl;
-    //     cout << "Sequence number : " << convertBytesToInt(header_mft_entry.sequence_number,2) << endl;
-    //     cout << "sector bat dau la : " << entry_readpoint << endl;
-    //     cout << " ----------------------------" << endl;
-    // }
-    
+    memcpy(&FND, file_name_data, sizeof(FileNameData));    
 }
 
 

@@ -30,10 +30,10 @@ struct headerAttribute{
     uint8_t size_of_data[4]; //Kich thuoc phan noi dung cua attribute neu attribute kieu resident
     uint8_t offset_data[2]; //Offset bat dau cua phan noi dung
 };
-void readMFTEntryHeader(BYTE entry[1024], uint32_t& first_MFT_sector, uint32_t& entry_readpoint, FileNameData& FND, headerMFT& header_mft_entry, uint32_t& size_of_name);
+void readMFTEntryHeader(BYTE entry[1024], uint32_t& first_MFT_sector, FileNameData& FND, headerMFT& header_mft_entry, uint32_t& size_of_name);
 void readAttributeHeader(BYTE entry[1024], uint32_t firstAttributeOffset,uint32_t& size_of_data, uint32_t& offset_data);
 int checkCondition(uint32_t flags, uint32_t name_space, uint32_t value_of_flags);
-void printMFTEntryInfo(FileNameData FND, headerMFT header_mft_entry, uint32_t first_MFT_sector, uint32_t entry_readpoint, uint32_t size_of_name);
+void printMFTEntryInfo(FileNameData FND,  uint32_t first_MFT_sector, uint32_t entry_readpoint, uint32_t size_of_name);
 
 #endif
 

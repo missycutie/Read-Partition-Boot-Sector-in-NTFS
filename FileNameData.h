@@ -18,6 +18,8 @@ struct FileNameData {
     uint8_t length_of_name;
     uint8_t name_space;
     char namefile[100];
+    uint32_t entry;
+    uint32_t size_name;
 };
 
 #endif
