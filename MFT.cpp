@@ -22,7 +22,9 @@ int checkCondition(int flags, int value_of_flags){ // Ham kiem tra dieu kien: Ch
      }
     return 0;
 }
+
 void printMFTEntryInfo(BYTE entry[1024],FileNameData FND, uint64_t first_MFT_sector, uint64_t entry_readpoint, uint64_t size_of_name, int attributeData, int size_of_data_data,int offset_data_data){
+   
     int length; // length of attribute data
     cout << "Ten : ";
     for (int i = 0; i < size_of_name; i++){
@@ -37,7 +39,7 @@ void printMFTEntryInfo(BYTE entry[1024],FileNameData FND, uint64_t first_MFT_sec
         }
         else{
             
-            BYTE data[size_of_data_data];
+            BYTE* data = new BYTE[size_of_data_data];
             int sData = offset_data_data + attributeData;
             int eData = sData + size_of_data_data;
             for (int i = 0, j = sData; i < size_of_data_data, j < eData; i++, j++){
@@ -48,6 +50,7 @@ void printMFTEntryInfo(BYTE entry[1024],FileNameData FND, uint64_t first_MFT_sec
             str[sizeof data] = 0; // Null termination.
             printf("Noi dung tap tin la: %s", str);
             cout<< endl;
+            delete []data;
         }
 
     }
@@ -67,6 +70,8 @@ void printMFTEntryInfo(BYTE entry[1024],FileNameData FND, uint64_t first_MFT_sec
     cout << "sector bat dau la : " << entry_readpoint << endl;
     cout << " ----------------------------" << endl;
 }
+
+
 void readMFTEntryHeader(BYTE entry[1024], uint64_t& first_MFT_sector, FileNameData& FND, headerMFT& header_mft_entry, uint64_t& size_of_name,int& attributeData){
     BYTE headerMFTEntry[42];
     for (int i = 0; i < 42; i++){
@@ -96,16 +101,34 @@ void readMFTEntryHeader(BYTE entry[1024], uint64_t& first_MFT_sector, FileNameDa
 
     size_of_name = size_of_data_file_name - 66;
      
-    BYTE file_name_data[size_of_data_file_name];
+    BYTE* file_name_data = new BYTE[size_of_data_file_name];
     int sFileName = offset_data_file_name + attributeFileName; //start of filename
     int eFileName = sFileName + size_of_data_file_name; // end of filename
+   
     for (int i = 0, j = sFileName; i < 66, j < sFileName+66; i++, j++){
         file_name_data[i] = entry[j];
     }
+    // for (int i =sFileName + 66; i < eFileName; i+=2){
+    //     cout << toHex(entry[i]) << " " ;
+
+    // }
+    // cout << endl;
+    
+
+    
+    // for (int i =sFileName + 66; i < eFileName; i+=2){
+    //     cout << toHex(entry[i]) << " " ;
+
+    // }
+    
+
+  
+
     memcpy(&FND, file_name_data, sizeof(FileNameData));    
     for (int i = 0, j = sFileName + 66; i < size_of_name, j < eFileName; i++, j++){
         FND.namefile[i] = entry[j];
     }
+    delete []file_name_data;
 }
 
 
