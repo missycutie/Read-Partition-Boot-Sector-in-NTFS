@@ -36,3 +36,10 @@ string toHex(unsigned int decnum) {
     }
     return hexnum.size() >= 2 ? hexnum : hexnum.size() == 1 ? "0" + hexnum : "00";
 }
+wstring convertBytesToWString(const uint8_t bytes[], int n) {
+    wstring str = L"";
+    for (int i = 0; i < n - 1; i += 2) {
+        str += (wchar_t)convertBytesToInt(bytes + i, 2);
+    }
+    return str;
+}

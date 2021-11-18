@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <stdint.h>
 #include "FileNameData.h"
-
+#include <string>
 
 struct headerMFT {
     uint8_t signal_MFT_entry[4]; //dau hieu nhan biet MFT entry: FILE0

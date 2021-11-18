@@ -3,7 +3,6 @@
 #include "MFT.h"
 #include "MFTEntry.h"
 #include "FileNameData.h"
-#include <bits/stdc++.h>
 #include <vector>
 using namespace std;
 
@@ -13,7 +12,7 @@ int main(int argc, char ** argv)
     uint64_t first_MFT_sector;
     uint64_t Sc;
     uint64_t begin_MFT_cluster;
-    ReadSector(L"\\\\.\\F:", 0, pbs); // Read Partition Boot Sector
+    ReadSector(L"\\\\.\\E:", 0, pbs); // Read Partition Boot Sector
     cout << endl;
     cout << "--------------------------" << endl;
 
@@ -35,7 +34,7 @@ int main(int argc, char ** argv)
         int size_of_data_data;
         int offset_data_data;
         uint64_t readpoint = (first_MFT_sector + i*2)*512;
-        ReadMFTEntry(L"\\\\.\\F:", readpoint, entry);
+        ReadMFTEntry(L"\\\\.\\E:", readpoint, entry);
         uint64_t temp = first_MFT_sector+i*2; // sector of entry
         readMFTEntryHeader(entry, first_MFT_sector, FND, header_mft_entry, size_of_name, attributeData);
         if (checkCondition(convertBytesToInt(header_mft_entry.flags, 2), convertBytesToInt(FND.value_of_flags,4))){

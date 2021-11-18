@@ -18,7 +18,7 @@ struct FileNameData {
     uint8_t reparse_value[4];
     uint8_t length_of_name;
     uint8_t name_space;
-    char namefile[SIZE_OF_NAME];
+    uint8_t namefile[SIZE_OF_NAME];
     uint8_t entry;
     uint8_t size_name;
 };

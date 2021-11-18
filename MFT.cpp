@@ -16,7 +16,7 @@ void readAttributeHeader(BYTE entry[1024], int firstAttributeOffset,int& sizeofD
     offsetData = convertBytesToInt(header_attribute.offset_data,2);
 }
 
-int checkCondition(int flags, int value_of_flags){ // Ham kiem tra dieu kien: Chi xuat neu la tap tin archieve hoac thu muc + tap tin chua bi xoa
+int checkCondition(int flags,  int value_of_flags){ // Ham kiem tra dieu kien: Chi xuat neu la tap tin archieve hoac thu muc + tap tin chua bi xoa
     if (flags != 0 && flags != 2  && (value_of_flags == 32 || value_of_flags == 268435456)) {
         return 1;
      }
@@ -26,11 +26,13 @@ int checkCondition(int flags, int value_of_flags){ // Ham kiem tra dieu kien: Ch
 void printMFTEntryInfo(BYTE entry[1024],FileNameData FND, uint64_t first_MFT_sector, uint64_t entry_readpoint, uint64_t size_of_name, int attributeData, int size_of_data_data,int offset_data_data){
    
     int length; // length of attribute data
-    cout << "Ten : ";
-    for (int i = 0; i < size_of_name; i++){
-        cout << FND.namefile[i] << " ";
-    }
-    cout << endl;
+    // cout << "Ten : ";
+    // for (int i = 0; i < size_of_name; i++){
+    //     cout << FND.namefile[i] << " ";
+    // }
+    wstring a = L"";
+    a = convertBytesToWString(FND.namefile, size_of_name);
+    wcout << "Ten: " <<  a << endl;
     if (convertBytesToInt(FND.value_of_flags,4) == 32){
         readAttributeHeader(entry, attributeData, size_of_data_data, offset_data_data, length);
         cout << "Kich thuoc tap tin la: " << size_of_data_data << " bytes" << endl;
