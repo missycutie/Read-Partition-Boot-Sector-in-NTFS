@@ -7,9 +7,9 @@
 #include <math.h>
 using namespace std;
 
-uint32_t convertBytesToInt(const BYTE bytes[], int n);
-string toBinary(int n);
-string bitwise_complement(string strbit);
+uint64_t convertBytesToInt(const BYTE bytes[], int n);
+string toBinary(int n); // Convert from int to binary
+string bitwise_complement(string strbit);  // Dao bit
 string toHex(unsigned int decnum);
 
 #endif

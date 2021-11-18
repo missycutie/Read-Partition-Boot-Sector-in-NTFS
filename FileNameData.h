@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <string>
 #define SIZE_OF_NAME 100
+
 using namespace std;
 struct FileNameData {
     uint8_t parent_folder_MFT_entry[8]; //Dia chi entry thu muc cha
@@ -17,9 +18,9 @@ struct FileNameData {
     uint8_t reparse_value[4];
     uint8_t length_of_name;
     uint8_t name_space;
-    char namefile[100];
-    uint32_t entry;
-    uint32_t size_name;
+    char namefile[SIZE_OF_NAME];
+    uint8_t entry;
+    uint8_t size_name;
 };
 
 #endif

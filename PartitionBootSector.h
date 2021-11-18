@@ -37,8 +37,7 @@ struct PartitionBootSector {
     uint8_t volume_serial_number[SIZE_VOLUME_SERIAL_NUMBER];
     uint8_t ntfs_value9[4];
 };
-int addressPartitionSector(BYTE sector[512], int partitionOrder); // partitionOrder starts at 0, read 4 bytes to return first address of PBS of partition
-void readBPB(BYTE sector[512], uint32_t& Sc, uint32_t& begin_MFT_luster);
+
 void printInfoPartitionBootSector(const PartitionBootSector& PBS); 
 #endif
 

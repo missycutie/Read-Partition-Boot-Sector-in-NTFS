@@ -1,23 +1,26 @@
 #include "helper.h"
-uint32_t convertBytesToInt(const BYTE bytes[], int n) {
-    uint32_t res = 0;
+uint64_t convertBytesToInt(const BYTE bytes[], int n) {
+    uint64_t res = 0;
     for (int i = n - 1; i >= 0; i--) {
         res = (res << 8) | bytes[i];
     }
     return res;
 }
+
 string toBinary(int n)
 {
     std::string r;
     while(n!=0) {r=(n%2==0 ?"0":"1")+r; n/=2;}
     return r;
 }
+
 string bitwise_complement(string strbit){
     for (int i = 0; i < strbit.length(); i++){
        strbit[i] = (strbit[i] == '0' ? '1' : '0');
     }
     return strbit;
 }
+
 string toHex(unsigned int decnum) {
     string hexnum = "";
     int rem;

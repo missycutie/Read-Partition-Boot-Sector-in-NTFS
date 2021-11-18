@@ -1,12 +1,12 @@
-#ifndef __HEADER_MFT_H__
-#define __HEADER_MFT_H__
+#ifndef __MFT_H__
+#define __MFT_H__
 #include <windows.h>
 #include <stdint.h>
 #include "FileNameData.h"
 
 
 struct headerMFT {
-    uint8_t signal_MFT_entry[4]; //dau hieu nhan biet MFT entry: FILE
+    uint8_t signal_MFT_entry[4]; //dau hieu nhan biet MFT entry: FILE0
     uint8_t offset_update_sequence[2];
     uint8_t sizeeof_fixup[2];
     uint8_t LSN[8]; //$LogFile Sequence Number
@@ -30,10 +30,10 @@ struct headerAttribute{
     uint8_t size_of_data[4]; //Kich thuoc phan noi dung cua attribute neu attribute kieu resident
     uint8_t offset_data[2]; //Offset bat dau cua phan noi dung
 };
-void readMFTEntryHeader(BYTE entry[1024], uint32_t& first_MFT_sector, FileNameData& FND, headerMFT& header_mft_entry, uint32_t& size_of_name);
-void readAttributeHeader(BYTE entry[1024], uint32_t firstAttributeOffset,uint32_t& size_of_data, uint32_t& offset_data);
-int checkCondition(uint32_t flags, uint32_t name_space, uint32_t value_of_flags);
-void printMFTEntryInfo(FileNameData FND,  uint32_t first_MFT_sector, uint32_t entry_readpoint, uint32_t size_of_name);
+void readMFTEntryHeader(BYTE entry[1024], uint64_t& first_MFT_sector, FileNameData& FND, headerMFT& header_mft_entry, uint64_t& size_of_name,int& attributeData);
+void readAttributeHeader(BYTE entry[1024], int firstAttributeOffset,int& sizeofData, int& offsetData, int& length);
+int checkCondition(int flags, int value_of_flags);
+void printMFTEntryInfo(BYTE entry[1024],FileNameData FND, uint64_t first_MFT_sector, uint64_t entry_readpoint, uint64_t size_of_name, int attributeData, int size_of_data_data,int offset_data_data);
 
 #endif
 
